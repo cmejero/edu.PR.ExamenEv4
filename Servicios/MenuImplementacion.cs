@@ -3,6 +3,7 @@ using edu.PR.EXAMEN4rep.Dtos;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.Design;
+using System.Globalization;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
@@ -13,7 +14,7 @@ namespace edu.PR.EXAMEN4rep.Servicios
     internal class MenuImplementacion : MenuInterfaz
     {
         FicherosInterfaz fi = new FicherosImplementacion();
-        OperativaInterfaz oi = new OperativaImplementacion();
+        
 
 
         public int menuYSeleccionPrincipal()
@@ -50,6 +51,7 @@ namespace edu.PR.EXAMEN4rep.Servicios
 
         public void accesoSubMenu()
         {
+            OperativaInterfaz oi = new OperativaImplementacion();
             int opcionUsuario;
             bool cerrarMenu = false;
 
@@ -77,6 +79,7 @@ namespace edu.PR.EXAMEN4rep.Servicios
 
                         case 2:
                             Console.WriteLine("Has seleccionado imprimir consultas");
+                            oi.imprimirConsultasF();
                             fi.escribirSeleccion("Has seleccionado imprimir consultas");
                             break;
 
@@ -124,6 +127,10 @@ namespace edu.PR.EXAMEN4rep.Servicios
 
         public void accesoSubMenuRegistros()
         {
+
+            OperativaInterfaz oi = new OperativaImplementacion();
+
+
             int opcionUsuario;
             bool cerrarMenu = false;
 
@@ -175,7 +182,7 @@ namespace edu.PR.EXAMEN4rep.Servicios
         }
 
 
-        private int menuYSeleccionMostrarConsultas()
+        public int menuYSeleccionMostrarConsultas()
         {
             int opcionUsuario;
 
@@ -190,10 +197,11 @@ namespace edu.PR.EXAMEN4rep.Servicios
             return opcionUsuario;
         }
 
-        private void accesoSubMenuMostrarConsultas()
+        public void accesoSubMenuMostrarConsultas()
         {
             int opcionUsuario;
             bool cerrarMenu = false;
+            string formato = "dd-MM-yyyy";
 
             do
             {
@@ -212,7 +220,7 @@ namespace edu.PR.EXAMEN4rep.Servicios
                             break;
 
                         case 1:
-
+                            
                             Console.WriteLine("Has seleccionado Psicologia");
                             Console.WriteLine("---------------------------");
                             Console.WriteLine("Introduzca una fecha");
@@ -220,6 +228,8 @@ namespace edu.PR.EXAMEN4rep.Servicios
                             DateTime fechaUP = DateTime.Parse(fechaUString);
 
                             bool encontrado3 = false;
+                             
+
                             foreach (ClienteDto cliente in Program.listaClientes)
                             {
                                 DateTime fechaCliente = cliente.FechaCita;
@@ -243,11 +253,19 @@ namespace edu.PR.EXAMEN4rep.Servicios
 
 
                         case 2:
-                            fi.escribirSeleccion("Has seleccionado Traumatologia");
+                            Console.WriteLine("Has seleccionado Traumatologia");
+                            Console.WriteLine("------------------------------");
+                            Console.WriteLine("Introduzca una fecha");
+                            string fechaUsuSt = Console.ReadLine();
+                            DateTime fechaUsuDt = DateTime.Parse(fechaUsuSt);
                             bool encontrado = false;
                             foreach (ClienteDto cliente in Program.listaClientes)
                             {
-                                if (cliente.Consulta.Equals("Traumatología"))
+                                DateTime fecha2 = cliente.FechaCita;
+                                string fecha2String = fecha2.ToString("dd-MM-yyyy");
+                                DateTime fechaF2 = DateTime.Parse(fecha2String);
+
+                                if (cliente.Consulta.Equals("Traumatología") && fecha2.CompareTo(fechaUsuDt) == 0)
                                 {
                                     encontrado = true;
                                     Console.WriteLine(cliente.ToString());
@@ -259,15 +277,25 @@ namespace edu.PR.EXAMEN4rep.Servicios
                                 Console.WriteLine("No ha citas");
                             }
 
-                            Console.WriteLine("Has seleccionado Traumatologia");
+                            
+                            fi.escribirSeleccion("Has seleccionado Traumatologia");
                             break;
 
                         case 3:
                             Console.WriteLine("Has seleccionado Fisioterapia");
+                            Console.WriteLine("-----------------------------");
+                            Console.WriteLine("Introduzca una fecha");
+                            string fechaUsu3 = Console.ReadLine();
+                            DateTime fechaUsuDt3 = DateTime.Parse(fechaUsu3);
+
                             bool encontrado2 = false;
                             foreach (ClienteDto cliente in Program.listaClientes)
                             {
-                                if (cliente.Consulta.Equals("Fisioterapia"))
+                                DateTime fecha3 = cliente.FechaCita;
+                                string fecha3S = fecha3.ToString("dd-MM-yyyy");
+                                DateTime fecha3Dt = DateTime.Parse(fecha3S);
+
+                                if (cliente.Consulta.Equals("Fisioterapia") && fechaUsuDt3.CompareTo(fecha3Dt) == 0)
                                 {
                                     Console.WriteLine(cliente.ToString());
                                     encontrado2 = true;
@@ -308,6 +336,8 @@ namespace edu.PR.EXAMEN4rep.Servicios
 
             } while (!cerrarMenu);
         }
+
+        
 
 
     }

@@ -9,6 +9,9 @@ namespace edu.PR.EXAMEN4rep.Servicios
     internal interface OperativaInterfaz
     {
         public void registroLlegada();
-        
+
+        public void imprimirConsultasF();
+
+
     }
 }

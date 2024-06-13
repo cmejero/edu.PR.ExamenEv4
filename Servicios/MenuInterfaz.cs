@@ -16,6 +16,9 @@ namespace edu.PR.EXAMEN4rep.Servicios
 
         public void accesoSubMenu();
         public void accesoSubMenuRegistros();
-        
+        public void accesoSubMenuMostrarConsultas();
+        public int menuYSeleccionMostrarConsultas();
+
+
     }
 }

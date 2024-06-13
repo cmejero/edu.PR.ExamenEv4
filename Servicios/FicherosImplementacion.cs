@@ -14,6 +14,7 @@ namespace edu.PR.EXAMEN4rep.Servicios
         internal class FicherosImplementacion : FicherosInterfaz
 
         {
+                
 
             public void escribirFicheroErrores(string mensaje)
             {
@@ -132,6 +133,76 @@ namespace edu.PR.EXAMEN4rep.Servicios
                 return nuevoId;
 
             }
+
+        public void imprimirConsultasF()
+        {
+            MenuInterfaz mi = new MenuImplementacion();
+
+            Console.WriteLine("Introduzca una fecha");
+            string fecha = Console.ReadLine();
+            DateTime fechaD = DateTime.Parse(fecha);
+            string consulta = "";
+            int opcionUsuario;
+            bool volver = false;
+
+            do
+            {
+                try
+                {
+                    opcionUsuario = mi.menuYSeleccionMostrarConsultas();
+
+                    switch (opcionUsuario) {
+                    
+                    case 0:
+                            volver = true;
+                        break;
+                    case 1:
+                            consulta = "Psicología";
+                            break;
+                    case 2:
+
+                            consulta = "Traumatología";
+                            break;
+                    case 3:
+
+                            consulta = "Fisioterapia";
+                            break;
+
+                    default:
+
+                            Console.WriteLine("La opcion indicada no es correcta");
+                            break;
+                    
+                    }                    
+
+                }
+                catch (Exception e) {
+                
+                
+                
+                }
+            } while (!volver);
+
+            StreamWriter st = null;
+
+            foreach (ClienteDto cliente in Program.listaClientes) {
+
+                DateTime fechaC = cliente.FechaCita;
+                string formatoString = fechaC.ToString("dd-MM-yyyy");
+                DateTime fechaCliente = DateTime.Parse(formatoString);
+
+                if (fechaD.CompareTo(fechaCliente) == 0 && cliente.Consulta.Equals(consulta)) {
+
+                    st = new StreamWriter(Program.rutaFicheroCitas);
+
+                    st.WriteLine(cliente.ToString(", "));
+
+                
+                }
+            
+            
+            }
+        }
 
         }
     

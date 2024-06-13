@@ -9,6 +9,7 @@ namespace edu.PR.EXAMEN4rep.Controladores
         // static public string rutaFichero = "C:\\Users\\Carlo\\OneDrive\\Escritorio\\FICHEROS\\";
         static public string rutaFichero = "C:\\Users\\Carlos\\Desktop\\FICHEROS\\Examen4\\";
         static public string rutaFicheroLogErrores = String.Concat(rutaFichero, Util.nombreFichero());
+        static public string rutaFicheroCitas = String.Concat(rutaFichero, Util.citas());
         //static public string rutaFicheroSeleccion = "C:\\Users\\Carlo\\OneDrive\\Escritorio\\FICHEROS\\ficheroSelecciones.txt";
         static public string rutaFicheroSeleccion = "C:\\Users\\Carlos\\Desktop\\FICHEROS\\Examen4\\ficheroSelecciones.txt";
         //static public string rutaFicheroPacientes = "C:\\Users\\Carlo\\OneDrive\\Escritorio\\FICHEROS\\pacientes.txt";

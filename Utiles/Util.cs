@@ -32,6 +32,29 @@ namespace edu.PR.EXAMEN4rep.Utiles
             return ruta;
         }
 
+        public static string citas()
+        {
+
+            string nombreRuta = "";
+
+            try
+            {
+                DateTime fechaActual = DateTime.Today;
+
+                string fechaString = fechaActual.ToString("ddMMyyyy");
+
+                nombreRuta = String.Concat("citasConAsistencia-", fechaString, ".txt");
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Se ha producido un error, intentelo más tarde");
+            }             
+                return nombreRuta;
+            
+
+        }
+
         
     }
 }
